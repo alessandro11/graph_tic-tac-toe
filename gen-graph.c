@@ -59,3 +59,45 @@ void gen_graph(const char *init_state) {
 	while( stop );
 }
 
+int check_winner(int player_last_pos, const char *state)
+{
+    switch( player_last_pos ) {
+        case 0:
+            sum = *state + *(state+1) + *(state+2)
+            if( sum == 237 )
+                return TRUE
+            sum = *state + *(state+4) + *(state+8)
+            if( sum == 237 )
+                return TRUE
+            sum = *state + *(state+3) + *(state+6)
+            if( sum == 237 )
+                return TRUE
+        break;
+
+        case 1:
+            sum = *(state) + *(state+1) + *(state+2)
+            if( sum == 237 )
+                return TRUE
+            sum = *(state+1) + *(state+4) + *(state+7)
+            if( sum == 237 )
+                return TRUE
+
+        break;
+
+        case 2:
+        break;
+        case 3:
+        break;
+        case 4:
+        break;
+        case 5:
+        break;
+        case 6:
+        break;
+        case 7:
+        break;
+        case 8:
+        break;
+    }
+
+}
