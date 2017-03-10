@@ -19,16 +19,43 @@
 #include <stdio.h>
 
 
+#define INITIAL_STATE		"O.X......"
+
+#ifndef TRUE
+#define TRUE		(1==1)
+#endif
+
+#ifndef FALSE
+#define	FALSE		(1!=1)
+#endif
+
+#define NOUGHTS		'O'
+#define CROSSES		'X'
+#define	EMPTY		'.'
+
 void gen_graph(const char*);
 
 /* __________________________________________________________________________________ */
 int main(int argn, char *argv[]) {
 
-	gen_graph(argv[1]);
+	//gen_graph(argv[1]);
+	gen_graph(INITIAL_STATE);
 
 	return 0;
 }
 
 void gen_graph(const char *init_state) {
-	printf("%s\n", init_state);
+	int stop;
+	char state[16] = {'\0'};
+	int player = 1;
+
+	strncpy(state, init_state, strlen(init_state));
+	stop = FALSE;
+	do {
+		dot = strchr(EMPTY);
+		*dot = NOUGHTS;
+		printf("%s --> %s\n", init_state, state);
+	}
+	while( stop );
 }
+
