@@ -6,10 +6,11 @@ all: gen-graph
 .c.o:
 	${CC} ${CFLAGS} -c $<
 
-gen-graph: gen-graph.o
+gen-graph: queue.o gen-graph.o
 	${CC} -o ${@} $^
 
 gen-graph.o: gen-graph.c
+queue.o: queue.c
 
 clean:
 	-rm -rf *.o gen-graph
