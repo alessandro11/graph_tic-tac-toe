@@ -1,0 +1,33 @@
+
+	printf("012 = %s\n", check_winner(0 , "OOOX.....") ? "True" : "False");
+	printf("048 = %s\n", check_winner(0 , "O...O...O") ? "True" : "False");
+	printf("036 = %s\n", check_winner(0 , "O..O..O..") ? "True" : "False");
+
+	printf("102 = %s\n", check_winner(1, "OOO......") ? "True" : "False");
+	printf("147 = %s\n", check_winner(1, ".O..O..O.") ? "True" : "False");
+
+	printf("210 = %s\n", check_winner(2, "OOO......") ? "True" : "False");
+	printf("246 = %s\n", check_winner(2, "..O.O.O..") ? "True" : "False");
+	printf("258 = %s\n", check_winner(2, "..O..O..O") ? "True" : "False");
+
+	printf("306 = %s\n", check_winner(3, "O..O..O..") ? "True" : "False");
+	printf("345 = %s\n", check_winner(3, "...OOO...") ? "True" : "False");
+
+	printf("408 = %s\n", check_winner(4, "O...O...O") ? "True" : "False");
+	printf("417 = %s\n", check_winner(4, ".O..O..O.") ? "True" : "False");
+	printf("426 = %s\n", check_winner(4, "..O.O.O..") ? "True" : "False");
+	printf("435 = %s\n", check_winner(4, "...OOO...") ? "True" : "False");
+
+	printf("546 = %s\n", check_winner(5, "....OOO..") ? "True" : "False");
+	printf("528 = %s\n", check_winner(5, "..O..O..O") ? "True" : "False");
+
+	printf("630 = %s\n", check_winner(6, "O..O..O..") ? "True" : "False");
+	printf("642 = %s\n", check_winner(6, "..O.O.O..") ? "True" : "False");
+	printf("678 = %s\n", check_winner(6, "......OOO") ? "True" : "False");
+
+	printf("768 = %s\n", check_winner(7, "......OOO") ? "True" : "False");
+	printf("714 = %s\n", check_winner(7, ".O..O..O.") ? "True" : "False");
+
+	printf("825 = %s\n", check_winner(8, "..O..O..O") ? "True" : "False");
+	printf("804 = %s\n", check_winner(8, "O...O...O") ? "True" : "False");
+	printf("867 = %s\n", check_winner(8, "......OOO") ? "True" : "False");
