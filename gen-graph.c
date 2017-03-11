@@ -63,6 +63,9 @@ int gen_graph(const char *init_state)
 		state[i] = NOUGHTS;
 		printf("\t\"%s\" -> \"%s\"\n", init_state, state);
 		winner = check_winner(i, state);
+		if( !winner )
+			gen_graph(state);
+
 		state[i] = EMPTY;
 	}
 
