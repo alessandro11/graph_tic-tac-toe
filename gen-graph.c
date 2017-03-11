@@ -33,33 +33,40 @@
 #define CROSSES		'X'
 #define	EMPTY		'.'
 
-void gen_graph(const char*);
+int gen_graph(const char*);
 int check_winner(int, const char*);
 
 
 /* __________________________________________________________________________________ */
-int main(int argn, char *argv[]) {
-
+int main(int argn, char *argv[])
+{
 	//gen_graph(argv[1]);
+	puts("strict digraph \"ae11\" {");
 	gen_graph(INITIAL_STATE);
+	puts("}");
 
 	return 0;
 }
 
-void gen_graph(const char *init_state) {
-	char state[16] = {'\0'};
-	(void)(state);
 
-	//strncpy(state, init_state, strlen(init_state));
-	/*
-	stop = FALSE;
-	do {
-		dot = strchr(EMPTY);
-		*dot = NOUGHTS;
-		printf("%s --> %s\n", init_state, state);
+int gen_graph(const char *init_state)
+{
+	int i;
+	static int winner = FALSE;
+	char state[16] = {'\0'};
+
+	strcpy(state, init_state);
+	for( i=0; i < 9; ++i ) {
+		if( state[i] != EMPTY )
+			continue;
+
+		state[i] = NOUGHTS;
+		printf("\t\"%s\" -> \"%s\"\n", init_state, state);
+		winner = check_winner(i, state);
+		state[i] = EMPTY;
 	}
-	while( stop );
-	 */
+
+	return winner;
 }
 
 int check_winner(int player_last_pos, const char *state)
