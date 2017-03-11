@@ -18,6 +18,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include "queue.h"
 
 #define INITIAL_STATE		"O.X......"
 
@@ -41,6 +42,14 @@ int check_winner(int, const char*);
 int main(int argn, char *argv[])
 {
 	//gen_graph(argv[1]);
+	
+	queue *q = create_queue();
+	push_queue(q, "a");
+	push_queue(q, "b");
+	push_queue(q, "c");
+
+	
+	return 0;
 	puts("strict digraph \"ae11\" {");
 	gen_graph(INITIAL_STATE);
 	puts("}");
