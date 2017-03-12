@@ -34,48 +34,57 @@
 #define CROSSES		'X'
 #define	EMPTY		'.'
 
-int gen_graph(const char*);
+int gen_graph(queue*);
 int check_winner(int, const char*);
 
 
 /* __________________________________________________________________________________ */
 int main(int argn, char *argv[])
 {
-	//gen_graph(argv[1]);
-	
-	queue *q = create_queue();
-	push_queue(q, "a");
-	push_queue(q, "b");
-	push_queue(q, "c");
+	int winner;
+	(void)(winner);
 
-	
-	return 0;
+	//gen_graph(argv[1]);	
+	queue *q = create_queue();
+
 	puts("strict digraph \"ae11\" {");
-	gen_graph(INITIAL_STATE);
+	push_queue(q, INITIAL_STATE);
+	winner = FALSE;
+	while( q->next ) {
+		winner = gen_graph(q);
+		//fprintf(stderr, "winner=%d, q->ele=%s, q->next=%p\n", winner, q->next->element, q->next);
+	}
 	puts("}");
 
 	return 0;
 }
 
 
-int gen_graph(const char *init_state)
+int gen_graph(queue *q)
 {
 	int i;
+	queue head;
+	char init_state[16];
 	static int winner = FALSE;
-	char state[16] = {'\0'};
 
-	strcpy(state, init_state);
+	head = pop_queue(q);
+	strcpy(init_state, head.element);
 	for( i=0; i < 9; ++i ) {
-		if( state[i] != EMPTY )
+		if( head.element[i] != EMPTY )
 			continue;
 
-		state[i] = NOUGHTS;
-		printf("\t\"%s\" -> \"%s\"\n", init_state, state);
-		winner = check_winner(i, state);
-		if( !winner )
-			gen_graph(state);
-
-		state[i] = EMPTY;
+		head.element[i] = NOUGHTS;
+		if( winner ) {
+			//if( check_winner(i, head.element) )
+			//	printf("\t\"%s\" -> \"%s\" [label=win%d]\n", init_state, head.element, i);
+			//else
+				printf("\t\"%s\" -> \"%s\"\n", init_state, head.element);
+		}else {
+			winner = check_winner(i, head.element);
+			printf("\t\"%s\" -> \"%s\"\n", init_state, head.element);
+			push_queue(q, head.element);
+		}
+		head.element[i] = EMPTY;
 	}
 
 	return winner;
