@@ -31,3 +31,17 @@
 	printf("825 = %s\n", check_winner(8, "..O..O..O") ? "True" : "False");
 	printf("804 = %s\n", check_winner(8, "O...O...O") ? "True" : "False");
 	printf("867 = %s\n", check_winner(8, "......OOO") ? "True" : "False");
+
+
+
+
+	queue b;
+	push_queue(q, "a");
+	push_queue(q, "b");
+	push_queue(q, "c");
+	
+	b = pop_queue(q);
+	b = pop_queue(q);
+	b = pop_queue(q);
+	b = pop_queue(q);
+
