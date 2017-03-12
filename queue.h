@@ -8,6 +8,6 @@ typedef struct __queue {
 
 queue *create_queue(void);
 void push_queue(queue *q, const char *elem);
-queue pop_queue(queue **q);
+queue pop_queue(queue *q);
 
 #endif

@@ -15,24 +15,33 @@ queue *create_queue(void)
 
 void push_queue(queue *q, const char *elem)
 {
-	queue *newq, *last;
+	queue *newq, *last, *before_last;
 
 	newq = (queue*)malloc(sizeof(queue));
 	strcpy(newq->element, elem);
 	newq->next = NULL;
 
 	last = q;
-	while( last )
+	while( last ) {
+		before_last = last;
 		last = last->next;
-	last->next = newq;
+	}
+	before_last->next = newq;
 }
 
-queue pop_queue(queue **q)
+queue pop_queue(queue *q)
 {
-	queue head = **q;
+	queue *tmp;
+	queue head = {0};
+
+	if( !q->next )
+		return head;
+
+	head = *(q->next);
 	head.next = NULL;
-	free(*q);
-	*q = (*q)->next;
+	tmp = q->next;
+	q->next = q->next->next;
+	free(tmp);
 
 	return head;
 }
