@@ -41,17 +41,13 @@ int check_winner(int, const char*);
 /* __________________________________________________________________________________ */
 int main(int argn, char *argv[])
 {
-	int winner;
-	(void)(winner);
-
 	//gen_graph(argv[1]);	
 	queue *q = create_queue();
 
 	puts("strict digraph \"ae11\" {");
 	push_queue(q, INITIAL_STATE);
-	winner = FALSE;
 	while( q->next ) {
-		winner = gen_graph(q);
+		gen_graph(q);
 		//fprintf(stderr, "winner=%d, q->ele=%s, q->next=%p\n", winner, q->next->element, q->next);
 	}
 	puts("}");
@@ -65,7 +61,6 @@ int gen_graph(queue *q)
 	int i;
 	queue head;
 	char init_state[16];
-	static int winner = FALSE;
 
 	head = pop_queue(q);
 	strcpy(init_state, head.element);
@@ -74,20 +69,17 @@ int gen_graph(queue *q)
 			continue;
 
 		head.element[i] = NOUGHTS;
-		if( winner ) {
-			//if( check_winner(i, head.element) )
-			//	printf("\t\"%s\" -> \"%s\" [label=win%d]\n", init_state, head.element, i);
-			//else
-				printf("\t\"%s\" -> \"%s\"\n", init_state, head.element);
+		if( check_winner(i, head.element) ) {
+			printf("\t\"%s\" -> \"%s\"\n", init_state, head.element);
+			//printf("\t\"%s\" -> \"%s\" [label=win%d]\n", init_state, head.element, i);
 		}else {
-			winner = check_winner(i, head.element);
 			printf("\t\"%s\" -> \"%s\"\n", init_state, head.element);
 			push_queue(q, head.element);
 		}
 		head.element[i] = EMPTY;
 	}
 
-	return winner;
+	return 0;
 }
 
 int check_winner(int player_last_pos, const char *state)
