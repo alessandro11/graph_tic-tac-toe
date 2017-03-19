@@ -63,6 +63,20 @@ int main(int argn, char *argv[])
 	return 0;
 }
 
+char vertexes[9000][32];
+unsigned int count = 0;
+
+int vertex_exist(const char *u, const char *v)
+{
+	int i;
+
+	for( i=0; i < count; ++i ) {
+		if( strcmp(u, vertexes[i]) == 0 &&\
+			strcmp(v, vertexes[i]+10) == 0 )
+			return TRUE;
+	}
+	return FALSE;
+}
 
 void gen_graph(queue *q, char player)
 {
@@ -77,14 +91,18 @@ void gen_graph(queue *q, char player)
 			continue;
 
 		head.element[i] = player;
-		if( check_winner(i, head.element) ) {
-			//printf("\t\"%s\" -> \"%s\"\n", init_state, head.element);
-			printf("\t\"%s\" -> \"%s\" [label=win%d]\n", init_state, head.element, i);
-		}else {
-			printf("\t\"%s\" -> \"%s\" [label=%d]\n", init_state, head.element, i);
-			push_queue(q, head.element);
+		if( !vertex_exist(init_state, head.element) ) {
+			if( check_winner(i, head.element) ) {
+				//printf("\t\"%s\" -> \"%s\"\n", init_state, head.element);
+				printf("\t\"%s\" -> \"%s\" [label=win%d]\n", init_state, head.element, i);
+			}else {
+				printf("\t\"%s\" -> \"%s\" [label=%d]\n", init_state, head.element, i);
+				push_queue(q, head.element);
+			}
+			strcpy(vertexes[count], init_state);
+			strcpy(vertexes[count++]+10, head.element);
+			head.element[i] = EMPTY;
 		}
-		head.element[i] = EMPTY;
 	}
 	fflush(stdout);
 	//getchar();
