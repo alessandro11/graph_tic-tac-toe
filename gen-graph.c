@@ -55,7 +55,6 @@ int main(int argn, char *argv[])
 		gen_graph(q, player);
 		player = invert ? CROSSES : NOUGHTS;
 		invert = !invert;	
-		//fprintf(stderr, "q->ele=%s, q->next=%p\n", q->next->element, q->next);
 	}
 	puts("}");
 	free(q);
@@ -77,17 +76,12 @@ void gen_graph(queue *q, char player)
 			continue;
 
 		head.element[i] = player;
-		if( check_winner(i, head.element) ) {
-			//printf("\t\"%s\" -> \"%s\"\n", init_state, head.element);
-			printf("\t\"%s\" -> \"%s\" [label=win%d]\n", init_state, head.element, i);
-		}else {
-			printf("\t\"%s\" -> \"%s\" [label=%d]\n", init_state, head.element, i);
+		if( !check_winner(i, head.element) )
 			push_queue(q, head.element);
-		}
+		printf("\t\"%s\" -> \"%s\"\n", init_state, head.element);
 		head.element[i] = EMPTY;
 	}
 	fflush(stdout);
-	//getchar();
 }
 
 int check_winner(int player_last_pos, const char *state)
