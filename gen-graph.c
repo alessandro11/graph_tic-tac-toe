@@ -78,7 +78,7 @@ void gen_graph(queue *q, char player)
 		head.element[i] = player;
 		if( !check_winner(i, head.element) )
 			push_queue(q, head.element);
-		printf("\t\"%s\" -> \"%s\"\n", init_state, head.element);
+		printf("\t\"%s\" -> \"%s\";\n", init_state, head.element);
 		head.element[i] = EMPTY;
 	}
 	fflush(stdout);
